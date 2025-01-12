@@ -1,5 +1,6 @@
 import json
 import requests 
+import os
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -11,7 +12,7 @@ repo = 'noterAI'
 owner = "Himasnhu-AT"
 url = f"{GITHUB_BASE_URL}/repos/{owner}/{repo}"
 
-token = ""
+token = os.getenv("GET_TOKEN")
 
 headers = {
     "Authorization": f"token {token}",
