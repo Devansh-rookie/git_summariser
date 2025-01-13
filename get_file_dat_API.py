@@ -91,7 +91,7 @@ try:
     #     json.dump(all_files, f)
     app = FastAPI()
 
-    @app.get(f"/get_file_data_{repo}")
+    @app.get(f"/get_file_data")
     async def get_file_data():
         return all_files
 except Exception as e:
