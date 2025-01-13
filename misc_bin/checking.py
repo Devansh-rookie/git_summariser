@@ -12,7 +12,8 @@ repo = 'noterAI'
 owner = "Himasnhu-AT"
 url = f"{GITHUB_BASE_URL}/repos/{owner}/{repo}"
 
-token = os.getenv("GET_TOKEN")
+token = os.getenv("GIT_TOKEN")
+# token = os.environ.get("GET_TOKEN")
 
 headers = {
     "Authorization": f"token {token}",
