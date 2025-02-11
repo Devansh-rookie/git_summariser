@@ -73,9 +73,9 @@ def fetch_repo_contents(owner, repo, expression):
     return files
 
 # Example usage
-owner = "Devansh-rookie"  # Replace with the repo owner username
-repo = "CSES"         # Replace with the repository name
-branch = "main"            # Replace with the branch name
+owner = "piyush-eon"  # Replace with the repo owner username
+repo = "mern-chat-app"         # Replace with the repository name
+branch = "master"            # Replace with the branch name
 
 
 try:
@@ -84,8 +84,8 @@ try:
         # print(f"File: {
         # file_path}")
         # print(f"Content: {content[:100]}...")  # Print the first 100 characters of content
-    # with open("some.json", 'w') as f:
-    #     json.dump(all_files, f)
+    with open("files_data.json", 'w') as f:
+        json.dump(all_files, f)
     print(all_files)
     # with open("checking_new.json", 'w') as f:
     #     json.dump(all_files, f)
