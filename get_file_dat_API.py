@@ -2,11 +2,21 @@ import requests
 import json
 import os
 from fastapi import FastAPI
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # GitHub API endpoint
 GITHUB_GRAPHQL_URL = "https://api.github.com/graphql"
 MAX_SIZE_IN_KB = 50
 # Your GitHub Personal Access Token
+# GITHUB_TOKEN = os.getenv("GIT_TOKEN")
+#
+
 GITHUB_TOKEN = os.getenv("GIT_TOKEN")
+if not GITHUB_TOKEN:
+    raise ValueError("GitHub token not found. Please set the GIT_TOKEN environment variable.")
+
 
 # Define the GraphQL query
 query = """
@@ -42,11 +52,14 @@ query ($owner: String!, $repo: String!, $expression: String!) {
 }
 """
 
+headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+
+
 def fetch_repo_contents(owner, repo, expression):
     """
     Recursively fetches all files in a GitHub repository.
     """
-    headers = {"Authorization": f"Bearer {GITHUB_TOKEN}"}
+    # headers = {"Authorization": f"token {GITHUB_TOKEN}"}
     variables = {"owner": owner, "repo": repo, "expression": expression}
     response = requests.post(
         GITHUB_GRAPHQL_URL, json={"query": query, "variables": variables}, headers=headers
@@ -73,11 +86,11 @@ def fetch_repo_contents(owner, repo, expression):
     return files
 
 # Example usage
-owner = "piyush-eon"  # Replace with the repo owner username
-repo = "mern-chat-app"         # Replace with the repository name
-branch = "master"            # Replace with the branch name
+owner = "anushika1206"  # Replace with the repo owner username
+repo = "virtual-air-hockey"         # Replace with the repository name
+branch = "main"            # Replace with the branch name
 
-
+# app = FastAPI()
 try:
     all_files = fetch_repo_contents(owner, repo, f"{branch}:")
     # for file_path, content in all_files.items():
