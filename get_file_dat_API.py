@@ -90,7 +90,7 @@ owner = "anushika1206"  # Replace with the repo owner username
 repo = "virtual-air-hockey"         # Replace with the repository name
 branch = "main"            # Replace with the branch name
 
-# app = FastAPI()
+app = FastAPI()
 try:
     all_files = fetch_repo_contents(owner, repo, f"{branch}:")
     # for file_path, content in all_files.items():
@@ -104,7 +104,7 @@ try:
     #     json.dump(all_files, f)
     app = FastAPI()
 
-    @app.get(f"/get_file_data")
+    @app.get("/get_file_data")
     async def get_file_data():
         return all_files
 except Exception as e:
