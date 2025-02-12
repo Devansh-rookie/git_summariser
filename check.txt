@@ -1,1 +1,9 @@
 
+Ball.py: doing
+Paddle.py: doing
+README.md: doing
+Score.py: doing
+collision.py: doing
+constants.py: doing
+hand_detection.py: doing
+main.py: doing
