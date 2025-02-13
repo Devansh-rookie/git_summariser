@@ -8,7 +8,7 @@ To-Do major topics
 3. Make the actual complete summarizer - Done
 4. Make the Language file thing similar to the GitHub - ToDo
 5. Make an Algo clone similar to the github next - ToDo
-
+6. Use rust to make documentation for the entire project
 
 To do sanskar:
 https://gitingest.com/
