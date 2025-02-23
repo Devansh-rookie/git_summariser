@@ -6,6 +6,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+directory = "results"
+if not os.path.exists(directory):
+    os.mkdir(directory)
+
+
 # GitHub API endpoint
 GITHUB_GRAPHQL_URL = "https://api.github.com/graphql"
 MAX_SIZE_IN_KB = 50
@@ -182,7 +187,7 @@ try:
         # print(f"File: {
         # file_path}")
         # print(f"Content: {content[:100]}...")  # Print the first 100 characters of content
-    with open("files_data.json", 'w') as f:
+    with open("results/files_data.json", 'w') as f:
         json.dump(all_files, f)
     # print(all_files)
     # with open("checking_new.json", 'w') as f:
@@ -201,7 +206,7 @@ try:
     if(basic_details is None):
         print("can't fetch details.")
     else:
-        with open("basic_details.txt", 'w') as f:
+        with open("results/basic_details.txt", 'w') as f:
             f.write(basic_details)
 
 except Exception as e:
@@ -211,7 +216,7 @@ except Exception as e:
 try:
     tree_data = get_repo_tree(owner, repo, branch)
     treee = print_directory_tree(tree_data)
-    with open("tree_struct.txt", 'w') as f:
+    with open("results/tree_struct.txt", 'w') as f:
         f.write(treee)
 
 except Exception as e:

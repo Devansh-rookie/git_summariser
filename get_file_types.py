@@ -1,6 +1,6 @@
 import json
 
-with open('files_data.json', 'r') as file:
+with open('results/files_data.json', 'r') as file:
     data = json.load(file)
 
 file_types = {}
@@ -18,7 +18,7 @@ for types, num in file_types.items():
     file_types[types] = percentage
 
 
-with open("file_types.json", 'w') as f:
+with open("results/file_types.json", 'w') as f:
     json.dump(file_types, f)
 
-print(file_types)
+# print(file_types)

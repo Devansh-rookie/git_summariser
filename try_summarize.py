@@ -54,9 +54,10 @@
 
 import ollama
 import json
+import os
 
 # Load JSON data
-with open('files_data.json', 'r') as file:
+with open('results/files_data.json', 'r') as file:
     data = json.load(file)
 
 # Initialize the Ollama client
@@ -70,9 +71,15 @@ conversation_history = [
 
 ]
 
+directory = "temp"
+if not os.path.exists(directory):
+    os.mkdir(directory)
+with open("temp/check.txt", 'w') as f:
+    pass
+
 
 def summarize_file(filename, content):
-    with open("check.txt", 'a') as f:
+    with open("temp/check.txt", 'a') as f:
         f.write(f"{filename}: doing\n")
     prompt = f"Summarize the following file, in 30 words and only include the actual content don't say that here is a file in 30 words I just need the actual data summary: {filename}:\n\n{content}\n\nSummary:"
     response = client.generate(model='llama3.2:latest', prompt=prompt)
@@ -133,13 +140,13 @@ for filename, content in data.items():
     file_summaries[filename] = summarize_file(filename, content)
 
 # Save summaries to JSON file
-with open('final_summaries.json', 'w') as f:
+with open('results/final_summaries.json', 'w') as f:
     json.dump(file_summaries, f)
 
-with open('full_project.txt', 'w') as f:
+with open('results/full_project.txt', 'w') as f:
     f.write(summarize_the_entire_thing(data))
 
-with open('dependencies.txt', 'w') as f:
+with open('results/dependencies.txt', 'w') as f:
     f.write(get_dependencies(data))
 # Print the summaries
 for filename, summary in file_summaries.items():
