@@ -54,6 +54,43 @@ query ($owner: String!, $repo: String!, $expression: String!) {
 
 headers = {"Authorization": f"token {GITHUB_TOKEN}"}
 
+num_of_folders = 0
+
+def fetch_repo_details(owner, repo):
+    # Endpoint to fetch basic repo details
+    repo_url = f'https://api.github.com/repos/{owner}/{repo}'
+    repo_response = requests.get(repo_url, headers=headers)
+    if repo_response.ok:
+        repo_data = repo_response.json()
+        stars = repo_data.get('stargazers_count')
+        forks = repo_data.get('forks_count')
+        issues = repo_data.get('open_issues_count')
+        watchers = repo_data.get('watchers_count')
+        description = repo_data.get('description')
+
+        print("Repository Details:")
+        print(f"  Description: {description}")
+        print(f"  Stars: {stars}")
+        print(f"  Forks: {forks}")
+        print(f"  Open Issues: {issues}")
+        print(f"  Watchers: {watchers}")
+    else:
+        print("Failed to fetch repository details")
+        return None
+
+    # Endpoint to fetch branches
+    branches_url = f'https://api.github.com/repos/{owner}/{repo}/branches'
+    branches_response = requests.get(branches_url, headers=headers)
+    if branches_response.ok:
+        branches_data = branches_response.json()
+        branch_names = [branch.get('name') for branch in branches_data]
+        print("\nBranches:")
+        for name in branch_names:
+            print(f"  {name}")
+    else:
+        print("Failed to fetch branches")
+
+
 
 def fetch_repo_contents(owner, repo, expression):
     """
@@ -79,6 +116,7 @@ def fetch_repo_contents(owner, repo, expression):
             files[entry["name"]] = entry.get("object", {}).get("text", None)
         elif entry["type"] == "tree":
             # It's a directory, recursively fetch its contents
+
             sub_expression = f"{expression}{entry['name']}/"
             sub_files = fetch_repo_contents(owner, repo, sub_expression)
             files.update({f"{entry['name']}/{k}": v for k, v in sub_files.items()})
@@ -109,6 +147,15 @@ try:
         return all_files
 except Exception as e:
     print(e)
+
+
+try:
+    basic_details = fetch_repo_details(owner= owner, repo= repo)
+
+
+except Exception as e:
+    print(e)
+
 
 if __name__ == "__main__":
     import uvicorn

@@ -1,0 +1,28 @@
+Based on the provided code snippet, the following libraries and frameworks are used:
+
+1. **OpenCV (cv2)**: A computer vision library that provides functions for image processing, feature detection, object recognition, and more.
+	* Version: 4.5.3
+2. **NumPy**: A library for efficient numerical computation in Python.
+	* Version: 1.20.2
+3. **TensorFlow (TF)** or **PyTorch (PT)**: Not explicitly used in this code snippet, but may be required for the hand detection algorithm (not shown here).
+	* TensorFlow (TF): Version: 2.4.0 (although not explicitly mentioned)
+	* PyTorch (PT): Not used
+4. **Python**: The primary programming language used for development.
+
+However, if we consider additional libraries that may be required to run the code smoothly:
+
+1. **PyQt or Tkinter**: For GUI functionality, including displaying the score on a separate window.
+	* PyQt: Version: 5.15.2
+	* Tkinter: Built-in Python library
+
+The following dependencies are also necessary for OpenCV and other libraries:
+
+1. **CMake**: A build system that allows users to specify compilation options in a file.
+2. **Glibc** (or **Linux Standard Library**): A library that provides basic functionality, such as memory management.
+
+Additionally, if you want to use the code with OpenCV's face detection and tracking features:
+
+1. **Face Detection**: Using the pre-trained Haar cascade classifier for detecting faces in images.
+2. **Face Tracking**: Using a feature like the EyeLID tracking algorithm.
+
+Please note that this list might not be exhaustive, and additional libraries or frameworks may be necessary depending on your specific requirements or modifications to the code.

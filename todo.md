@@ -29,3 +29,12 @@ Minor Topics
 3. Panda: filesystem(filesystem_json) -> render html
 4. json(filesystem_json -> api calls(api_json) -> render(HTML))
 2.
+
+
+Devansh working:
+
+1. Code Analysis Languages -- Done
+2. File Structure -- Todo
+3. Dependencies -- Done
+4. Repo Info -- Doing
+5. Config -- Postponed
