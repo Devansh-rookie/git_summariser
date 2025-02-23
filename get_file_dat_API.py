@@ -179,7 +179,7 @@ def print_directory_tree(tree_data):
 
 # Example usage
 owner = "Himasnhu-AT"  # Replace with the repo owner username
-repo = "PoW-Shield"         # Replace with the repository name
+repo = "FastSearch"         # Replace with the repository name
 branch = "main"            # Replace with the branch name
 
 if(runAPI):
@@ -228,6 +228,6 @@ except Exception as e:
     print(e)
     print("e in tree")
 
-if __name__ == "__main__":
+if __name__ == "__main__" and runAPI:
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)

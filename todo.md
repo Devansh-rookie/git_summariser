@@ -34,7 +34,8 @@ Minor Topics
 Devansh working:
 
 1. Code Analysis Languages -- Done
-2. File Structure -- Todo
+2. File Structure -- Done
 3. Dependencies -- Done
-4. Repo Info -- Doing
+4. Repo Info -- Done
 5. Config -- Postponed
+6. Add context thing to each file summary

@@ -1,0 +1,12 @@
+Repository Details:
+  Description: Google's Search alternative written in rust for creation and usage as a private search engine
+  Stars: 2
+  Forks: 0
+  Open Issues: 8
+  Watchers: 2
+
+Branches:
+  Himasnhu-AT-patch-1
+  dependabot/npm_and_yarn/dev-docs/rollup-4.22.4
+  dependabot/npm_and_yarn/dev-docs/vite-5.4.6
+  main

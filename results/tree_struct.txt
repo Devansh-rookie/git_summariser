@@ -1,0 +1,55 @@
+|-- .gitignore
+|-- .gitmodules
+|-- LICENSE
+|-- Readme.md
+|-- assets
+    |-- demo.png
+    |-- workingmodel.mov
+|-- dev-docs
+    |-- .gitignore
+    |-- .vitepress
+        |-- config.js
+    |-- changelog.md
+    |-- code-explanation.md
+    |-- code-structure.md
+    |-- contributing.md
+    |-- index.md
+    |-- license.md
+    |-- package.json
+    |-- pnpm-lock.yaml
+    |-- readme.md
+    |-- tf_idf.md
+    |-- todo.md
+|-- packages
+    |-- engine
+        |-- .gitignore
+        |-- Cargo.lock
+        |-- Cargo.toml
+        |-- docs.gl
+        |-- index-big.json
+        |-- index-small.json
+        |-- index.json
+        |-- small
+            |-- glAttachShader.xhtml
+            |-- glBeginConditionalRender.xhtml
+            |-- glClearBufferData.xhtml
+            |-- glCompressedTexImage1D.xhtml
+            |-- glCopyTexImage1D.xhtml
+        |-- src
+            |-- lexer.rs
+            |-- main.rs
+            |-- model.rs
+            |-- server.rs
+            |-- snowball
+                |-- algorithms
+                    |-- english_stemmer.rs
+                    |-- mod.rs
+                |-- among.rs
+                |-- mod.rs
+                |-- snowball_env.rs
+        |-- webclient
+            |-- index.html
+            |-- index.js
+|-- performance.md
+|-- todo_add_docs.md
+|-- working-logs.md
