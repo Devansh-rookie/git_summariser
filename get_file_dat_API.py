@@ -57,6 +57,7 @@ headers = {"Authorization": f"token {GITHUB_TOKEN}"}
 num_of_folders = 0
 
 def fetch_repo_details(owner, repo):
+    basic = ""
     # Endpoint to fetch basic repo details
     repo_url = f'https://api.github.com/repos/{owner}/{repo}'
     repo_response = requests.get(repo_url, headers=headers)
@@ -67,13 +68,13 @@ def fetch_repo_details(owner, repo):
         issues = repo_data.get('open_issues_count')
         watchers = repo_data.get('watchers_count')
         description = repo_data.get('description')
+        basic += ("Repository Details:") +'\n'
+        basic += (f"  Description: {description}") +'\n'
+        basic += (f"  Stars: {stars}") +'\n'
+        basic += (f"  Forks: {forks}") +'\n'
+        basic += (f"  Open Issues: {issues}") +'\n'
+        basic += (f"  Watchers: {watchers}") + '\n'
 
-        print("Repository Details:")
-        print(f"  Description: {description}")
-        print(f"  Stars: {stars}")
-        print(f"  Forks: {forks}")
-        print(f"  Open Issues: {issues}")
-        print(f"  Watchers: {watchers}")
     else:
         print("Failed to fetch repository details")
         return None
@@ -84,12 +85,13 @@ def fetch_repo_details(owner, repo):
     if branches_response.ok:
         branches_data = branches_response.json()
         branch_names = [branch.get('name') for branch in branches_data]
-        print("\nBranches:")
+        basic += ("\nBranches:\n")
         for name in branch_names:
-            print(f"  {name}")
+            basic += (f"  {name}\n")
     else:
         print("Failed to fetch branches")
 
+    return basic
 
 
 def fetch_repo_contents(owner, repo, expression):
@@ -123,6 +125,51 @@ def fetch_repo_contents(owner, repo, expression):
 
     return files
 
+
+
+def get_repo_tree(owner, repo, branch="main"):
+
+    # Step 1: Get branch details to retrieve tree SHA
+    branch_url = f"https://api.github.com/repos/{owner}/{repo}/branches/{branch}"
+    branch_response = requests.get(branch_url, headers=headers)
+    if not branch_response.ok:
+        raise Exception("Failed to fetch branch details")
+    branch_data = branch_response.json()
+    tree_sha = branch_data["commit"]["commit"]["tree"]["sha"]
+
+    # Step 2: Fetch the recursive tree structure
+    tree_url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{tree_sha}?recursive=1"
+    tree_response = requests.get(tree_url, headers=headers)
+    if not tree_response.ok:
+        raise Exception("Failed to fetch repository tree")
+    tree_data = tree_response.json()
+
+    return tree_data
+
+
+def print_directory_tree(tree_data):
+    """
+    Process and print a simple text-based tree structure.
+    """
+    # Build a hierarchical dictionary from the flat list of tree entries.
+
+    structure = ""
+    tree = {}
+    for item in tree_data.get("tree", []):
+        parts = item["path"].split("/")
+        current = tree
+        for part in parts:
+            current = current.setdefault(part, {})
+    def build_tree(subtree, prefix=""):
+        lines = []
+        for key, nested in sorted(subtree.items()):
+            lines.append(prefix + "|-- " + key)
+            lines.extend(build_tree(nested, prefix + "    "))
+        return lines
+    structure = build_tree(tree)
+    return "\n".join(structure)
+
+
 # Example usage
 owner = "anushika1206"  # Replace with the repo owner username
 repo = "virtual-air-hockey"         # Replace with the repository name
@@ -137,7 +184,7 @@ try:
         # print(f"Content: {content[:100]}...")  # Print the first 100 characters of content
     with open("files_data.json", 'w') as f:
         json.dump(all_files, f)
-    print(all_files)
+    # print(all_files)
     # with open("checking_new.json", 'w') as f:
     #     json.dump(all_files, f)
     app = FastAPI()
@@ -151,11 +198,25 @@ except Exception as e:
 
 try:
     basic_details = fetch_repo_details(owner= owner, repo= repo)
-
+    if(basic_details is None):
+        print("can't fetch details.")
+    else:
+        with open("basic_details.txt", 'w') as f:
+            f.write(basic_details)
 
 except Exception as e:
     print(e)
 
+
+try:
+    tree_data = get_repo_tree(owner, repo, branch)
+    treee = print_directory_tree(tree_data)
+    with open("tree_struct.txt", 'w') as f:
+        f.write(treee)
+
+except Exception as e:
+    print(e)
+    print("e in tree")
 
 if __name__ == "__main__":
     import uvicorn

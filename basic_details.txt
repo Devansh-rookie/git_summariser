@@ -1,0 +1,9 @@
+Repository Details:
+  Description: None
+  Stars: 0
+  Forks: 0
+  Open Issues: 0
+  Watchers: 0
+
+Branches:
+  main
