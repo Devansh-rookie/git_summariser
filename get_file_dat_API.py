@@ -4,6 +4,8 @@ import os
 from fastapi import FastAPI
 from dotenv import load_dotenv
 
+runAPI = False
+
 load_dotenv()
 
 directory = "results"
@@ -176,11 +178,12 @@ def print_directory_tree(tree_data):
 
 
 # Example usage
-owner = "anushika1206"  # Replace with the repo owner username
-repo = "virtual-air-hockey"         # Replace with the repository name
+owner = "Himasnhu-AT"  # Replace with the repo owner username
+repo = "PoW-Shield"         # Replace with the repository name
 branch = "main"            # Replace with the branch name
 
-app = FastAPI()
+if(runAPI):
+    app = FastAPI()
 try:
     all_files = fetch_repo_contents(owner, repo, f"{branch}:")
     # for file_path, content in all_files.items():
@@ -192,11 +195,13 @@ try:
     # print(all_files)
     # with open("checking_new.json", 'w') as f:
     #     json.dump(all_files, f)
-    app = FastAPI()
 
-    @app.get("/get_file_data")
-    async def get_file_data():
-        return all_files
+    if(runAPI):
+        app = FastAPI()
+
+        @app.get("/get_file_data")
+        async def get_file_data():
+            return all_files
 except Exception as e:
     print(e)
 

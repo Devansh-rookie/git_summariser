@@ -1,0 +1,39 @@
+|-- .gitignore
+|-- .powconfig.json
+|-- .vscode
+    |-- c_cpp_properties.json
+    |-- launch.json
+    |-- settings.json
+|-- 1_ddos_data.csv
+|-- Dockerfile
+|-- algos
+    |-- c
+        |-- main.c
+    |-- rust
+        |-- .gitignore
+        |-- Cargo.lock
+        |-- Cargo.toml
+        |-- output.json
+        |-- src
+            |-- main.rs
+        |-- static
+            |-- index.html
+            |-- script.js
+            |-- styles.css
+|-- build.sh
+|-- config
+    |-- .gitignore
+    |-- index.js
+    |-- package-lock.json
+    |-- package.json
+    |-- sample.ts
+|-- dataGen.sh
+|-- ddos_data.csv
+|-- docker-compose.yaml
+|-- firewall
+    |-- firewall
+    |-- main.cpp
+|-- log.csv
+|-- readme.md
+|-- run.sh
+|-- test.sh

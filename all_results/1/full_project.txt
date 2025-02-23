@@ -1,0 +1,24 @@
+This is a Python script that uses OpenCV to detect hand gestures in real-time and control a paddle on the screen. Here's a high-level overview of the code:
+
+1. The script initializes a video capture object using OpenCV, which reads frames from the default camera.
+2. It creates an instance of the `HandDetection` class, which is responsible for detecting hand centroids in each frame.
+3. In the main loop, it reads frames from the video capture object and applies various transformations to the frames:
+	* Resizes the frames to the desired size (defined by `WIDTH` and `HEIGHT` constants).
+	* Flips the frames horizontally using `cv2.flip`.
+4. It gets the centroids of hands/color in each frame using the `get_centroid` method of the `HandDetection` instance.
+5. Based on the number of centroids detected, it moves one or two paddles (left and right) to the corresponding x-coordinates and y-coordinates of the centroids.
+6. It draws the paddles on the frames using the `draw` method of the paddle instances.
+7. It starts moving a ball on the screen by calling the `move` method of the `Ball` instance.
+8. It displays the score on the frame using the `show` method of the `Score` instance.
+9. It handles collisions between the ball and paddles by calling the `handle_collision` function from the `collision` module.
+10. Finally, it releases the video capture object and closes all OpenCV windows when the program exits.
+
+The script uses various modules and classes, including:
+
+* `utils.hand_detection`: The `HandDetection` class is responsible for detecting hand centroids in each frame.
+* `utils.Ball`: The `Ball` class represents a ball on the screen, with methods to move and show it.
+* `utils.Paddle`: The `Paddle` class represents a paddle on the screen, with methods to move and draw it.
+* `utils.collision`: The `handle_collision` function handles collisions between the ball and paddles.
+* `utils.constants`: This module defines various constants used throughout the script, including `WIDTH`, `HEIGHT`, `LEFT_OFFSET`, and others.
+
+Overall, this script uses computer vision techniques to detect hand gestures in real-time and control a paddle on the screen.

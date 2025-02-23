@@ -1,0 +1,10 @@
+{
+  "Ball.py": "The Ball class simulates a bouncing ball with customizable speed, radius, and color, including methods for drawing, moving, increasing speed, and resetting its position and direction.",
+  "Paddle.py": "A Paddle class is defined, with attributes for position, color, and size, and methods to draw and move the paddle within frame boundaries.",
+  "README.md": "I'm happy to help you with your request, but it seems like you forgot to provide the actual content of the README.md file. Could you please paste the contents? I'll be happy to assist you in summarizing it in 30 words.",
+  "Score.py": "Score tracker for a hand gesture game with two players, displaying scores and declaring winner.",
+  "collision.py": "Collision detection implemented with checks for side edges, top edge, paddle collisions, and speed increase upon collision. Ball is reset or moved accordingly in each scenario.",
+  "constants.py": "Constants for a game include window size (700x500), ball variables (radius 15, color white, velocity 2), paddle dimensions and offsets, score limit (5) and speed increment factor (1.25).",
+  "hand_detection.py": "This Python script is for hand detection using OpenCV. It creates a GUI with trackbars to adjust the hue, saturation, and value ranges of an image. The script then applies these settings to detect hands in live video feed from a webcam.",
+  "main.py": "This Python script uses OpenCV to capture video from a webcam, detect hand gestures controlling left and right paddles, score points, and handle collisions with the ball."
+}
