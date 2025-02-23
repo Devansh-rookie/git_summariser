@@ -1,55 +1,44 @@
+|-- .DS_Store
 |-- .gitignore
-|-- .gitmodules
-|-- LICENSE
-|-- Readme.md
-|-- assets
-    |-- demo.png
-    |-- workingmodel.mov
-|-- dev-docs
-    |-- .gitignore
-    |-- .vitepress
-        |-- config.js
-    |-- changelog.md
-    |-- code-explanation.md
-    |-- code-structure.md
-    |-- contributing.md
-    |-- index.md
-    |-- license.md
-    |-- package.json
-    |-- pnpm-lock.yaml
-    |-- readme.md
-    |-- tf_idf.md
-    |-- todo.md
-|-- packages
-    |-- engine
-        |-- .gitignore
-        |-- Cargo.lock
-        |-- Cargo.toml
-        |-- docs.gl
-        |-- index-big.json
-        |-- index-small.json
-        |-- index.json
-        |-- small
-            |-- glAttachShader.xhtml
-            |-- glBeginConditionalRender.xhtml
-            |-- glClearBufferData.xhtml
-            |-- glCompressedTexImage1D.xhtml
-            |-- glCopyTexImage1D.xhtml
-        |-- src
-            |-- lexer.rs
-            |-- main.rs
-            |-- model.rs
-            |-- server.rs
-            |-- snowball
-                |-- algorithms
-                    |-- english_stemmer.rs
-                    |-- mod.rs
-                |-- among.rs
-                |-- mod.rs
-                |-- snowball_env.rs
-        |-- webclient
-            |-- index.html
-            |-- index.js
-|-- performance.md
-|-- todo_add_docs.md
-|-- working-logs.md
+|-- all_results
+    |-- .DS_Store
+    |-- 1
+        |-- basic_details.txt
+        |-- dependencies.txt
+        |-- file_types.json
+        |-- files_data.json
+        |-- final_summaries.json
+        |-- full_project.txt
+        |-- tree_struct.txt
+    |-- 2
+        |-- basic_details.txt
+        |-- dependencies.txt
+        |-- file_types.json
+        |-- files_data.json
+        |-- final_summaries.json
+        |-- full_project.txt
+        |-- tree_struct.txt
+|-- get_file_dat_API.py
+|-- get_file_types.py
+|-- misc_bin
+    |-- check_printing.py
+    |-- checking.py
+    |-- checking_new.json
+    |-- demo.py
+    |-- maybe_needed_later
+        |-- try_sum.py
+    |-- neww.json
+    |-- some.json
+|-- results
+    |-- basic_details.txt
+    |-- dependencies.txt
+    |-- file_types.json
+    |-- files_data.json
+    |-- final_summaries.json
+    |-- full_project.txt
+    |-- tree_struct.txt
+|-- run_back_files.sh
+|-- temp
+    |-- check.txt
+|-- todo.md
+|-- try_summarize.py
