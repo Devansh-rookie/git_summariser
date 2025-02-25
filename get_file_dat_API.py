@@ -180,7 +180,7 @@ def print_directory_tree(tree_data):
 # Example usage
 owner = "Devansh-rookie"  # Replace with the repo owner username
 repo = "git_summariser"         # Replace with the repository name
-branch = "check_back"            # Replace with the branch name
+branch = "main"            # Replace with the branch name
 
 if(runAPI):
     app = FastAPI()
