@@ -38,4 +38,6 @@ Devansh working:
 3. Dependencies -- Done
 4. Repo Info -- Done
 5. Config -- Postponed
-6. Add context thing to each file summary
+6. Add context thing to each file summary - ToDo
+7. Add Caching
+8. Make a ChatBot of the current data fed to a LLM(cloud based for it to be fast)
