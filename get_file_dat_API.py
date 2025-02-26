@@ -1,10 +1,7 @@
 import requests
 import json
 import os
-from fastapi import FastAPI
 from dotenv import load_dotenv
-
-runAPI = False
 
 load_dotenv()
 
@@ -102,21 +99,87 @@ def fetch_repo_details(owner, repo):
 
 
 def fetch_repo_contents(owner, repo, expression):
-    """
-    Recursively fetches all files in a GitHub repository.
-    """
-    # headers = {"Authorization": f"token {GITHUB_TOKEN}"}
-    variables = {"owner": owner, "repo": repo, "expression": expression}
+    # """
+    # Recursively fetches all files in a GitHub repository.
+    # """
+    # # headers = {"Authorization": f"token {GITHUB_TOKEN}"}
+    # variables = {"owner": owner, "repo": repo, "expression": expression}
+    # response = requests.post(
+    #     GITHUB_GRAPHQL_URL, json={"query": query, "variables": variables}, headers=headers
+    # )
+
+    # if response.status_code != 200:
+    #     raise Exception(f"Query failed: {response.status_code}, {response.text}")
+
+    # data = response.json()
+    # entries = data["data"]["repository"]["object"]["entries"]
+    # files = {}
+    #
+    #
+
+
+
+    """Recursively fetch files with path validation"""
+    # Split expression into branch and path
+    if ":" in expression:
+        branch, path = expression.split(":", 1)
+    else:
+        branch = expression
+        path = ""
+
+    # Verify branch exists using REST API
+    branch_url = f"https://api.github.com/repos/{owner}/{repo}/branches/{branch}"
+    branch_res = requests.get(branch_url, headers=headers)
+    if branch_res.status_code != 200:
+        available = list_branches(owner, repo)
+        raise Exception(f"Branch '{branch}' not found. Available: {', '.join(available)}")
+
+    # Verify path exists using REST API
+    if path:
+        path_url = f"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}"
+        path_res = requests.get(path_url, headers=headers)
+        if path_res.status_code != 200:
+            raise Exception(f"Path '{path}' not found in branch '{branch}'")
+
+    # Continue with GraphQL processing
+    variables = {"owner": owner, "repo": repo, "expression": f"{branch}:{path}"}
+
+    # variables = {"owner": owner, "repo": repo, "expression": expression}
     response = requests.post(
-        GITHUB_GRAPHQL_URL, json={"query": query, "variables": variables}, headers=headers
-    )
+            GITHUB_GRAPHQL_URL,
+            json={"query": query, "variables": variables},
+            headers=headers
+        )
 
     if response.status_code != 200:
         raise Exception(f"Query failed: {response.status_code}, {response.text}")
 
     data = response.json()
-    entries = data["data"]["repository"]["object"]["entries"]
+    print(data)
+
+    # Add comprehensive error checking
+    if not data.get("data"):
+        if "errors" in data:
+            error_msg = "\n".join([e["message"] for e in data["errors"]])
+            raise Exception(f"GraphQL errors: {error_msg}")
+        raise Exception("No data in response")
+
+    repo_data = data["data"].get("repository")
+    if not repo_data:
+        raise Exception("Repository not found or access denied")
+
+    repo_object = repo_data.get("object")
+    if not repo_object:
+        raise Exception(f"Git reference '{expression}' not found")
+
+    if "entries" not in repo_object:  # Handle non-tree objects
+        if repo_object.get("type") == "blob":
+            return {expression.split(":")[-1]: repo_object.get("text")}
+        return {}
+
+    entries = repo_object["entries"]
     files = {}
+
 
     for entry in entries:
         #  and entry["object"]["byteSize"] < 1000
@@ -177,57 +240,45 @@ def print_directory_tree(tree_data):
     return "\n".join(structure)
 
 
-# Example usage
-owner = "Devansh-rookie"  # Replace with the repo owner username
-repo = "git_summariser"         # Replace with the repository name
-branch = "main"            # Replace with the branch name
-
-if(runAPI):
-    app = FastAPI()
-try:
-    all_files = fetch_repo_contents(owner, repo, f"{branch}:")
-    # for file_path, content in all_files.items():
-        # print(f"File: {
-        # file_path}")
-        # print(f"Content: {content[:100]}...")  # Print the first 100 characters of content
-    with open("results/files_data.json", 'w') as f:
-        json.dump(all_files, f)
-    # print(all_files)
-    # with open("checking_new.json", 'w') as f:
-    #     json.dump(all_files, f)
-
-    if(runAPI):
-        app = FastAPI()
-
-        @app.get("/get_file_data")
-        async def get_file_data():
-            return all_files
-except Exception as e:
-    print(e)
-
-
-try:
-    basic_details = fetch_repo_details(owner= owner, repo= repo)
-    if(basic_details is None):
-        print("can't fetch details.")
-    else:
-        with open("results/basic_details.txt", 'w') as f:
-            f.write(basic_details)
-
-except Exception as e:
-    print(e)
-
-
-try:
+def fetch_repo_structure(owner, repo, branch):
+    """
+    Fetch the structure of a repository.
+    """
     tree_data = get_repo_tree(owner, repo, branch)
-    treee = print_directory_tree(tree_data)
-    with open("results/tree_struct.txt", 'w') as f:
-        f.write(treee)
+    return print_directory_tree(tree_data)
 
-except Exception as e:
-    print(e)
-    print("e in tree")
 
-if __name__ == "__main__" and runAPI:
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+
+if __name__ == "__main__":
+
+    owner = "Devansh-rookie"  # Replace with the repo owner username
+    repo = "git_summariser"         # Replace with the repository name
+    branch = "main"            # Replace with the branch name
+    try:
+        all_files = fetch_repo_contents(owner, repo, f"{branch}:")
+
+        with open("results/files_data.json", 'w') as f:
+            json.dump(all_files, f)
+
+    except Exception as e:
+        print(e)
+
+    try:
+        basic_details = fetch_repo_details(owner= owner, repo= repo)
+        if(basic_details is None):
+            print("can't fetch details.")
+        else:
+            with open("results/basic_details.txt", 'w') as f:
+                f.write(basic_details)
+
+    except Exception as e:
+        print(e)
+
+
+    try:
+        with open("results/tree_struct.txt", 'w') as f:
+            f.write(fetch_repo_structure(owner, repo, branch))
+
+    except Exception as e:
+        print(e)
+        print("e in tree")

@@ -1,0 +1,15 @@
+                   
+                   
+┌─────────────────┐
+│ 3 Code Findings │
+└─────────────────┘
+                                      
+  [36m[22m[24m  get_file_dat_API.py[0m
+     ❱ [1muniversal-variable-finder[0m
+          Detected basic_details usage
+                                      
+          209┆ basic_details = fetch_repo_details(owner= owner, repo= repo)
+            ⋮┆----------------------------------------
+          210┆ if(basic_details is None):
+            ⋮┆----------------------------------------
+          214┆ f.write(basic_details)

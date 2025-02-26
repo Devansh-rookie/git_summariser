@@ -1,0 +1,6 @@
+rules:
+  - id: universal-variable-finder
+    languages: [python,c,cpp,javascript,typescript,java,rust,r,ruby,dockerfile,dart,go]
+    message: Detected basic_details usage
+    pattern: basic_details
+    severity: INFO

@@ -80,20 +80,25 @@ def get_dependencies(content):
 
     return dependencies
 
+def create_the_summaries(data):
+    file_summaries = {}
+    for filename, content in data.items():
+        file_summaries[filename] = summarize_file(filename, content)
 
-file_summaries = {}
-for filename, content in data.items():
-    file_summaries[filename] = summarize_file(filename, content)
+    return file_summaries
 
-# Save summaries to JSON file
-with open('results/final_summaries.json', 'w') as f:
-    json.dump(file_summaries, f)
 
-with open('results/full_project.txt', 'w') as f:
-    f.write(summarize_the_entire_thing(data))
+if __name__ == "__main__":
+    file_summaries = create_the_summaries(data)
+    # Save summaries to JSON file
+    with open('results/final_summaries.json', 'w') as f:
+        json.dump(file_summaries, f)
 
-with open('results/dependencies.txt', 'w') as f:
-    f.write(get_dependencies(data))
-# Print the summaries
-for filename, summary in file_summaries.items():
-    print(f"File: {filename}\nSummary: {summary}\n")
+    with open('results/full_project.txt', 'w') as f:
+        f.write(summarize_the_entire_thing(data))
+
+    with open('results/dependencies.txt', 'w') as f:
+        f.write(get_dependencies(data))
+    # Print the summaries
+    for filename, summary in file_summaries.items():
+        print(f"File: {filename}\nSummary: {summary}\n")

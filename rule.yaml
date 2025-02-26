@@ -1,0 +1,13 @@
+rules:
+  # - id: find-my-var
+  #   languages: [python]
+  #   message: Found variable runAPI
+  #   pattern: runAPI
+  #   severity: INFO
+
+  - id: universal-variable-finder
+    languages: [python, javascript, java, go, c, csharp, ruby, php, rust]
+    message: Detected runAPI usage
+    pattern: runAPI
+    severity: INFO
+# $MYVAR for variable
