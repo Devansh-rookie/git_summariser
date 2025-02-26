@@ -111,11 +111,17 @@ async def get_repo_summary(
         raw_data = await get_combined_data_internal(owner, repo, branch)
 
         data = raw_data['data'][0]['data']
+        print(raw_data)
+        print(data)
+                # "owner_info": raw_data['data'][1]['data']['owner'],
+        file_type_count = (raw_data['data'][3]['data'])
+        if(file_type_count is not None):
+            file_type_count = len(file_type_count)
+
         return {
             "summary": {
                 "total_files": len(raw_data['data'][0]['data']),
-                "owner_info": raw_data['data'][1]['data']['owner'],
-                "file_types_count": len(raw_data['data'][3]['data']),
+                "file_types_count": file_type_count,
                 "entire_file_summary": summarize_the_entire_thing(data),
                 "all_summaries": create_the_summaries(data),
                 "dependencies": get_dependencies(data)
