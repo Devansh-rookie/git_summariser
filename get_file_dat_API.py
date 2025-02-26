@@ -12,7 +12,7 @@ if not os.path.exists(directory):
 
 # GitHub API endpoint
 GITHUB_GRAPHQL_URL = "https://api.github.com/graphql"
-MAX_SIZE_IN_KB = 50
+MAX_SIZE_IN_KB = 25
 # Your GitHub Personal Access Token
 # GITHUB_TOKEN = os.getenv("GIT_TOKEN")
 #
