@@ -131,8 +131,8 @@ def fetch_repo_contents(owner, repo, expression):
     branch_url = f"https://api.github.com/repos/{owner}/{repo}/branches/{branch}"
     branch_res = requests.get(branch_url, headers=headers)
     if branch_res.status_code != 200:
-        available = list_branches(owner, repo)
-        raise Exception(f"Branch '{branch}' not found. Available: {', '.join(available)}")
+        # available = list_branches(owner, repo)
+        raise Exception(f"Branch '{branch}' not found. Available: {', '.join('.')}")
 
     # Verify path exists using REST API
     if path:

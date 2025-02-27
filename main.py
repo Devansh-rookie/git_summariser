@@ -63,7 +63,7 @@ async def get_combined_data_internal(owner: str, repo: str, branch: str):
 
 """Get combined repository data with dynamic parameters
 Example request:
-/api/fetch?owner=Devansh-rookie&repo=git_summariser&branch=main
+/api/fetch?owner=anushika1206&repo=virtual-air-hockey&branch=main
 """
 @app.get("/api/fetch")
 async def get_combined_data(
