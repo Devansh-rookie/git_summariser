@@ -10,6 +10,10 @@ import traceback
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+if os.path.exists("cache"):
+    print("Cache directory exists")
+else:
+    os.makedirs("cache")
 
 # Add CORS middleware
 app.add_middleware(
@@ -22,6 +26,12 @@ app.add_middleware(
 
 async def get_combined_data_internal(owner: str, repo: str, branch: str):
     try:
+        key_str = f'{owner}_{repo}_{branch}_fetch'
+
+        if os.path.exists("cache/" + key_str + ".json"):
+            with open("cache/" + key_str + ".json", "r") as f:
+                return json.load(f)
+
         contents = fetch_repo_contents(owner, repo, branch)
 
         # Handle GitHub API errors first
@@ -34,7 +44,8 @@ async def get_combined_data_internal(owner: str, repo: str, branch: str):
         with open("results/files_data.json", 'w') as f:
             json.dump(contents, f)
 
-        return {
+
+        fetch_dict = {
             "owner": owner,
             "repo": repo,
             "branch": branch,
@@ -45,6 +56,12 @@ async def get_combined_data_internal(owner: str, repo: str, branch: str):
                 {"type": "File-Types", "data": fetch_file_types()}
             ]
         }
+
+        with open("cache/" + key_str + ".json", 'w') as f:
+            json.dump(fetch_dict, f)
+
+        return fetch_dict
+
     except HTTPException:
         raise
     except Exception as e:
@@ -100,6 +117,12 @@ async def get_repo_summary(
 ):
     """New endpoint that processes data from the existing endpoint"""
     try:
+        key_str = f'{owner}_{repo}_{branch}_summary'
+
+        if os.path.exists("cache/" + key_str + ".json"):
+            with open("cache/" + key_str + ".json", "r") as f:
+                return json.load(f)
+
         raw_data = await get_combined_data_internal(owner, repo, branch)
 
         data = raw_data['data'][0]['data']
@@ -110,7 +133,7 @@ async def get_repo_summary(
         if(file_type_count is not None):
             file_type_count = len(file_type_count)
 
-        return {
+        summary_dict = {
             "summary": {
                 "Total-Files": len(raw_data['data'][0]['data']),
                 "Number-Of-File-Types": file_type_count,
@@ -123,6 +146,11 @@ async def get_repo_summary(
                 "branch": branch,
             }
         }
+
+        with open("cache/" + key_str + ".json", 'w') as f:
+            json.dump(summary_dict, f)
+
+        return summary_dict
 
     except Exception as e:
         raise HTTPException(500, detail=f"Summary generation failed: {str(e)}")
