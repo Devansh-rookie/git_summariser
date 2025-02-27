@@ -20,24 +20,6 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-# async def get_combined_data_internal(owner: str, repo: str, branch: str):
-#     """Shared data fetcher used by multiple endpoints"""
-#     os.makedirs("results", exist_ok=True)
-#     contents = fetch_repo_contents(owner, repo, branch)
-#     with open("results/files_data.json", 'w') as f:
-#         json.dump(contents, f)
-#     return {
-#         "owner": owner,from flask_cors import CORS
-#         "repo": repo,
-#         "branch": branch,
-#         "data": [
-#             {"type": "repo_contents", "data": contents},
-#             {"type": "repo_details", "data": fetch_repo_details(owner, repo)},
-#             {"type": "repo_structure", "data": fetch_repo_structure(owner, repo, branch)},
-#             {"type": "file_types", "data": fetch_file_types()}
-#         ]
-#     }
-#
 async def get_combined_data_internal(owner: str, repo: str, branch: str):
     try:
         contents = fetch_repo_contents(owner, repo, branch)
