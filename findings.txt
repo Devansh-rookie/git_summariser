@@ -8,8 +8,8 @@
      ❱ [1muniversal-variable-finder[0m
           Detected basic_details usage
                                       
-          209┆ basic_details = fetch_repo_details(owner= owner, repo= repo)
+          267┆ basic_details = fetch_repo_details(owner= owner, repo= repo)
             ⋮┆----------------------------------------
-          210┆ if(basic_details is None):
+          268┆ if(basic_details is None):
             ⋮┆----------------------------------------
-          214┆ f.write(basic_details)
+          272┆ f.write(basic_details)

@@ -1,0 +1,11 @@
+./get_file_dat_API.py:267:        basic_details = fetch_repo_details(owner= owner, repo= repo)
+./get_file_dat_API.py:268:        if(basic_details is None):
+./get_file_dat_API.py:271:            with open("results/basic_details.txt", 'w') as f:
+./get_file_dat_API.py:272:                f.write(basic_details)
+./variable_matching.py:25:    findAllOccurrencesVariable("basic_details")
+./variable_matching.py:26:    findAllUsingGrep("basic_details")
+./variable_rules.yaml:4:    message: Detected basic_details usage
+./variable_rules.yaml:5:    pattern: basic_details
+Binary file ./__pycache__/variable_matching.cpython-311.pyc matches
+Binary file ./__pycache__/get_file_dat_API.cpython-311.pyc matches
+Binary file ./.git/index matches

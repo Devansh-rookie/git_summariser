@@ -18,8 +18,9 @@ def findAllOccurrencesVariable(variable:str):
 def findAllUsingGrep(variable:str):
     # use grep here
     #
-
-    os.system(f"grep -rnw . -e '{variable}' > findings_general.txt")
+    # first clone then do the stuff
+    exclude = "{tmp,bak,txt,json,log,md}"
+    os.system(f"grep -rnw --exclude-dir=cache --exclude=*.{exclude} . -e '{variable}' > findings_general.txt")
 
 if __name__ == "__main__":
     findAllOccurrencesVariable("basic_details")
