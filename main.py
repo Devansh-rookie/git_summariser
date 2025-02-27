@@ -57,10 +57,10 @@ async def get_combined_data_internal(owner: str, repo: str, branch: str):
             "repo": repo,
             "branch": branch,
             "data": [
-                {"type": "repo_contents", "data": contents},
-                {"type": "repo_details", "data": fetch_repo_details(owner, repo)},
-                {"type": "repo_structure", "data": fetch_repo_structure(owner, repo, branch)},
-                {"type": "file_types", "data": fetch_file_types()}
+                {"type": "Repository-Contents", "data": contents},
+                {"type": "Repository-Detail", "data": fetch_repo_details(owner, repo)},
+                {"type": "Repository-Structure", "data": fetch_repo_structure(owner, repo, branch)},
+                {"type": "File-Types", "data": fetch_file_types()}
             ]
         }
     except HTTPException:
@@ -130,11 +130,11 @@ async def get_repo_summary(
 
         return {
             "summary": {
-                "total_files": len(raw_data['data'][0]['data']),
-                "file_types_count": file_type_count,
-                "entire_file_summary": summarize_the_entire_thing(data),
-                "all_summaries": create_the_summaries(data),
-                "dependencies": get_dependencies(data)
+                "Total-Files": len(raw_data['data'][0]['data']),
+                "Number-Of-File-Types": file_type_count,
+                "Project-Summary": summarize_the_entire_thing(data),
+                "Filewise-Summary": create_the_summaries(data),
+                "Dependencies": get_dependencies(data)
             },
             "metadata": {
                 "repo": repo,
