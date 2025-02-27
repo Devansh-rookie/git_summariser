@@ -1,0 +1,27 @@
+# Web Framework
+fastapi
+uvicorn
+
+# GitHub API interactions
+requests
+
+# Environment and configuration
+python-dotenv
+
+# Data processing
+pandas  # If needed for data analysis
+numpy   # If needed for numerical operations
+
+# Development tools
+black   # Code formatting
+flake8  # Code linting
+pytest  # Testing
+
+# Logging and debugging
+logging
+
+# JSON processing
+json
+
+# File operations
+pathlib 

@@ -7,8 +7,18 @@ from try_summarize import get_dependencies, summarize_the_entire_thing, create_t
 from variable_matching import findAllUsingGrep, findAllOccurrencesVariable
 from get_file_types import fetch_file_types
 import traceback
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins, you can specify a list of allowed origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
 
 # async def get_combined_data_internal(owner: str, repo: str, branch: str):
 #     """Shared data fetcher used by multiple endpoints"""
@@ -17,7 +27,7 @@ app = FastAPI()
 #     with open("results/files_data.json", 'w') as f:
 #         json.dump(contents, f)
 #     return {
-#         "owner": owner,
+#         "owner": owner,from flask_cors import CORS
 #         "repo": repo,
 #         "branch": branch,
 #         "data": [
