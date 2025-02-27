@@ -21,7 +21,8 @@ function App() {
       const data2 = {
         "owner": data1[0],
         "repo": data1[1],
-        "branch": data1[2] || "main" // Default to "main" if branch is not specified
+        "tree":data1[2],
+        "branch": data1[3] || "main" // Default to "main" if branch is not specified
       };
       return data2;
     }
