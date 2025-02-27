@@ -128,11 +128,11 @@ def fetch_repo_contents(owner, repo, expression):
         path = ""
 
     # Verify branch exists using REST API
-    branch_url = f"https://api.github.com/repos/{owner}/{repo}/branches/{branch}"
-    branch_res = requests.get(branch_url, headers=headers)
-    if branch_res.status_code != 200:
-        # available = list_branches(owner, repo)
-        raise Exception(f"Branch '{branch}' not found. Available: {', '.join('.')}")
+    # branch_url = f"https://api.github.com/repos/{owner}/{repo}/branches/{branch}"
+    # branch_res = requests.get(branch_url, headers=headers)
+    # if branch_res.status_code != 200:
+    #     # available = list_branches(owner, repo)
+    #     raise Exception(f"Branch '{branch}' not found. Available: {', '.join('.')}")
 
     # Verify path exists using REST API
     if path:
@@ -170,7 +170,8 @@ def fetch_repo_contents(owner, repo, expression):
 
     repo_object = repo_data.get("object")
     if not repo_object:
-        raise Exception(f"Git reference '{expression}' not found")
+        return None
+        # raise Exception(f"Git reference '{expression}' not found")
 
     if "entries" not in repo_object:  # Handle non-tree objects
         if repo_object.get("type") == "blob":
@@ -191,6 +192,8 @@ def fetch_repo_contents(owner, repo, expression):
 
             sub_expression = f"{expression}{entry['name']}/"
             sub_files = fetch_repo_contents(owner, repo, sub_expression)
+            if sub_files is None:
+                continue
             files.update({f"{entry['name']}/{k}": v for k, v in sub_files.items()})
 
     return files
