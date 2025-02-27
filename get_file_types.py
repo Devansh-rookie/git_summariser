@@ -19,6 +19,8 @@ def fetch_file_types():
         percentage = (num/totalFiles)*100
         file_types[types] = percentage
 
+    return file_types
+
 if __name__ == "__main__":
     file_types = fetch_file_types()
     with open("results/file_types.json", 'w') as f:
