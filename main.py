@@ -8,7 +8,7 @@ from variable_matching import findAllUsingGrep, findAllOccurrencesVariable
 from get_file_types import fetch_file_types
 import traceback
 from fastapi.middleware.cors import CORSMiddleware
-
+import re
 app = FastAPI()
 if os.path.exists("cache"):
     print("Cache directory exists")
@@ -126,8 +126,8 @@ async def get_repo_summary(
         raw_data = await get_combined_data_internal(owner, repo, branch)
 
         data = raw_data['data'][0]['data']
-        print(raw_data)
-        print(data)
+        # print(raw_data)
+        # print(data)
                 # "owner_info": raw_data['data'][1]['data']['owner'],
         file_type_count = (raw_data['data'][3]['data'])
         if(file_type_count is not None):
@@ -154,3 +154,32 @@ async def get_repo_summary(
 
     except Exception as e:
         raise HTTPException(500, detail=f"Summary generation failed: {str(e)}")
+
+
+@app.get("/api/search")
+async def search_codebase_string(
+    owner: str = "octocat",
+    repo: str = "Hello-World",
+    branch: str = "master",
+    query: str = ""):
+
+    raw_data = await get_combined_data_internal(owner, repo, branch)
+    data = raw_data['data'][0]['data']
+
+    def search_codebase(code_data, search_str):
+        results = {}
+        # Escape special characters and create regex pattern
+        pattern = re.compile(rf'\b{re.escape(search_str)}\b')  # Exact word match
+        for filename, content in code_data.items():
+            # Normalize line endings and split
+            lines = content.replace('\r\n', '\n').split('\n')
+            matches = []
+            for line in lines:
+                if pattern.search(line):
+                    matches.append(line)
+            if matches:
+                results[filename] = matches
+        return results
+
+    search_results = search_codebase(data, query)
+    return search_results
