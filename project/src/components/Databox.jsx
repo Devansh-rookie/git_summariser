@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import useMultiFetch from './useMultiFetch';
 import { useGithubRepoData } from './useGithubrepo';
-
+import CardDatabox from './CardDatabox';
+import SearchBox from './SearchBox';
 const Databox = ({ owner, repo, branch,repoUrl }) => {
   const [shouldFetch] = useState({
     summary: `http://localhost:8002/api/summary/?owner=${owner}&repo=${repo}&branch=${branch}`,
@@ -18,25 +19,24 @@ const Databox = ({ owner, repo, branch,repoUrl }) => {
     <>
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
         {Object.entries(data.dependencies["data"] || {}).map(([key, value]) => (
-          <div key={key} className="bg-gray-900 border border-gray-700 rounded-lg p-4">
-            <h1 className="text-lg text-gray-200 mb-2">{value.type}</h1>
-            <p className="text-sm text-gray-400" 
-               dangerouslySetInnerHTML={{ 
-                 __html: JSON.stringify(value.data, null, 2).replace(/\\n/g, '<br />') 
-               }} 
-            />
-          </div>
+          <CardDatabox key={key} title={value.type} content={value.data}>
+          <p className="text-sm text-gray-400" 
+            dangerouslySetInnerHTML={{ 
+              __html: JSON.stringify(value.data, null, 2).replace(/\\n/g, '<br />') 
+            }} 
+         />
+       </CardDatabox>
         ))}
         {Object.entries(data.summary["summary"] || {}).map(([key, value]) => (
-          <div key={key} className="bg-gray-900 border border-gray-700 rounded-lg p-4">
-            <h1 className="text-lg text-gray-200 mb-2">{key}</h1>
-            <p className="text-sm text-gray-400" 
-               dangerouslySetInnerHTML={{ 
-                 __html: JSON.stringify(value, null, 2).replace(/\\n/g, '<br />') 
-               }} 
-            />
-          </div>
+          <CardDatabox key={key} title={key} content={value}>
+          <p className="text-sm text-gray-400" 
+            dangerouslySetInnerHTML={{ 
+              __html: JSON.stringify(value, null, 2).replace(/\\n/g, '<br />') 
+            }} 
+         />
+       </CardDatabox>
         ))}
+        <SearchBox owner={owner} repo={repo} branch={branch} />
       </div>
     </>
   );

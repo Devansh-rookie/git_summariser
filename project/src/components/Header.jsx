@@ -1,26 +1,24 @@
 import React from 'react'
-import { Code2, Github } from 'lucide-react'
+import { Code, GitBranch, Star, GitPullRequest, Moon, Settings, Github } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
-    <nav className="flex items-center justify-between">
-      <div className="flex items-center gap-2">
-        <Code2 className="w-6 h-6 text-[#c9d1d9]" />
-        <span className="text-xl font-bold text-[#c9d1d9]">
-          Git<span className="text-[#58a6ff]">deci</span>
-        </span>
+    <div className="absolute top-0 left-0 right-0 h-12 bg-[#0d1117]/90 backdrop-blur-sm border-b border-[#21262d] flex items-center px-4 z-10">
+      <div className="flex items-center text-[#58a6ff] font-semibold">
+        <Code size={20} className="mr-2" />
+        <span>Gitdeci</span>
       </div>
-      
-      <a
-        href="https://github.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-2 text-[#8b949e] hover:text-[#c9d1d9] transition-colors"
-      >
-        <Github className="w-5 h-5" />
-        <span>GitHub</span>
-      </a>
-    </nav>
+      <div className="ml-auto flex items-center space-x-4">
+        <Link to="/" className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors ">Home</Link>
+        <Link to="/codeeditor" className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors">Code Editor</Link>
+        {/* <GitBranch size={18} className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors" /> */}
+        <Star size={20} className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors" />
+        <Github size={22} className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors" />
+        <Moon size={20} className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors" />
+        {/* <Settings size={18} className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors" /> */}
+      </div>
+    </div>
   )
 }
 
