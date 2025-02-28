@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useMultiFetch from './useMultiFetch';
 import { useGithubRepoData } from './useGithubrepo';
 import CardDatabox from './CardDatabox';
+import SearchBox from './SearchBox';
 const Databox = ({ owner, repo, branch,repoUrl }) => {
   const [shouldFetch] = useState({
     summary: `http://localhost:8002/api/summary/?owner=${owner}&repo=${repo}&branch=${branch}`,
@@ -35,6 +36,7 @@ const Databox = ({ owner, repo, branch,repoUrl }) => {
          />
        </CardDatabox>
         ))}
+        <SearchBox owner={owner} repo={repo} branch={branch} />
       </div>
     </>
   );
