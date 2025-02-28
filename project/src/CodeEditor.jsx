@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from './comp/Header';
+import Header from './components/Header';
 import FileExplorer from './comp/FileExplorer';
 import CodeEditor2 from './comp/CodeEditior';
 import SidePanel from './comp/SidePanel';
@@ -47,6 +47,7 @@ function CodeEditor() {
           content={selectedFile.content} 
         />
         <SidePanel 
+          summary={summary}
           selectedFileName={selectedFile.name} 
           initialMessages={initialChatMessages} 
         />
