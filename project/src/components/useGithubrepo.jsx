@@ -40,8 +40,8 @@ const useGithubRepoData = (repoUrl, summaryUrl, dependencyUrl) => {
       fetchData();
     }
   }, [summaryUrl, dependencyUrl]);
-
+  
   return { data, isLoading, error };
 };
 
-export default useGithubRepoData;
+export { useGithubRepoData };

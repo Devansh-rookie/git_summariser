@@ -4,3 +4,28 @@ venv
 __pycache__/
 .DS_Store
 .gitignore
+/node_modules
+# Logs
+project/logs
+project/*.log
+project/npm-debug.log*
+project/yarn-debug.log*
+project/yarn-error.log*
+project/pnpm-debug.log*
+project/lerna-debug.log*
+
+project/node_modules
+project/dist
+project/dist-ssr
+project/*.local
+
+# Editor directories and files
+project/.vscode/*
+!.vscode/extensions.json
+project/.idea
+project/.DS_Store
+project/*.suo
+project/*.ntvs*
+project/*.njsproj
+project/*.sln
+project/*.sw?

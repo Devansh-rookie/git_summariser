@@ -2,10 +2,10 @@ import React from 'react'
 
 const ExampleRepo = ({ setRepoUrl}) => {
   const exampleRepos = [
-    { name: "VirtualAirHockey", path: "/anushika1206/virtual-air-hockey/main" },
-    { name: "FastAPI", path: "/yourusername/fastapi/main" },
-    { name: "Flask", path: "/yourusername/flask/main" },
-    { name: "Excalidraw", path: "/yourusername/excalidraw/main" },
+    { name: "VirtualAirHockey", path: "/anushika1206/virtual-air-hockey/tree/main" },
+    { name: "FastAPI", path: "/yourusername/fastapi/tree/main" },
+    { name: "Flask", path: "/yourusername/flask/tree/main" },
+    { name: "Excalidraw", path: "/yourusername/excalidraw/tree/main" },
     { name: "ApiAnalytics", path: "/yourusername/api-analytics/main" }
   ];
 

@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Button from "./components/button";
 import Particles from "./components/Particles";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [repoUrl, setRepoUrl] = useState("");
@@ -51,7 +52,15 @@ function App() {
   };
 
   return (
+
+      
+
     <div className="min-h-screen text-white">
+
+      
+
+
+
       <Suspense fallback={null}>
         <Particles />
       </Suspense>
