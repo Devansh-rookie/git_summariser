@@ -41,3 +41,5 @@ Devansh working:
 6. Add context thing to each file summary - ToDo
 7. Add Caching
 8. Make a ChatBot of the current data fed to a LLM(cloud based for it to be fast)
+
+Anushika
