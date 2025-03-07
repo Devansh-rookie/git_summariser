@@ -3,10 +3,11 @@ import useMultiFetch from './useMultiFetch';
 import { useGithubRepoData } from './useGithubrepo';
 import CardDatabox from './CardDatabox';
 import SearchBox from './SearchBox';
+const backend_url = import.meta.env.VITE_BACKEND_URL;
 const Databox = ({ owner, repo, branch,repoUrl }) => {
   const [shouldFetch] = useState({
-    summary: `http://localhost:8002/api/summary/?owner=${owner}&repo=${repo}&branch=${branch}`,
-    dependencies: `http://localhost:8002/api/fetch/?owner=${owner}&repo=${repo}&branch=${branch}`,
+    summary: `${backend_url}/api/summary/?owner=${owner}&repo=${repo}&branch=${branch}`,
+    dependencies: `${backend_url}/api/fetch/?owner=${owner}&repo=${repo}&branch=${branch}`,
   });
 
   // Fetch data using the hook

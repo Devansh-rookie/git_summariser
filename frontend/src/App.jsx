@@ -9,6 +9,7 @@ import Hero from "./components/Hero";
 import Button from "./components/button";
 import Particles from "./components/Particles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+const backend_url = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   const [repoUrl, setRepoUrl] = useState("");
@@ -37,7 +38,7 @@ function App() {
       setProjec(true);
       setData(repoData);
       try {
-        const response = await fetch(`http://localhost:8002/api/fetch/?owner=${repoData.owner}&repo=${repoData.repo}&branch=${repoData.branch}`);
+        const response = await fetch(`${backend_url}/api/fetch/?owner=${repoData.owner}&repo=${repoData.repo}&branch=${repoData.branch}`);
         if (!response.ok) throw new Error('Failed to fetch data');
         const result = await response.json();
         setData(result); 

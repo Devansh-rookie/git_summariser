@@ -60,7 +60,8 @@ pip install -r requirements.txt
 
 ## 🚀 Server Execution
 ```
-uvicorn main:app --reload --port 8002 --host 0.0.0.0
+gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:8000
+
 ```
 
 ### 🔍 Access Endpoints

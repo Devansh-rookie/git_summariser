@@ -16,12 +16,38 @@ else:
     os.makedirs("cache")
 
 # Add CORS middleware
+origins = [
+    "http://localhost:5173",    # Vite default development port
+    "http://localhost:3000",    # Alternative development port
+    "https://git-summariser.vercel.app",  # Production frontend URL on Vercel
+    "https://git-summariser-1.onrender.com",  # Production backend URL on Render
+    "https://git-summariser.onrender.com",  # Alternative production URL
+    "https://*.vercel.app",     # Any Vercel deployment
+    "https://*.render.com"      # Any Render deployment
+]
+
+# Function to validate origin against patterns
+def get_allowed_origins(origin: str):
+    if not origin:
+        return False
+    # Allow localhost
+    if origin.startswith(("http://localhost:", "http://127.0.0.1:")):
+        return True
+    # Allow any vercel.app subdomain
+    if origin.endswith(".vercel.app"):
+        return True
+    # Allow any render.com subdomain
+    if origin.endswith(".render.com"):
+        return True
+    return origin in origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins, you can specify a list of allowed origins
+    allow_origins=["*"],      # We'll handle origin validation in allow_origin_regex
+    allow_origin_regex="https://.*\.vercel\.app|https://.*\.render\.com",  # Allow all subdomains
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],      # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],      # Allows all headers
 )
 
 async def get_combined_data_internal(owner: str, repo: str, branch: str):
