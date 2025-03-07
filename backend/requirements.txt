@@ -20,3 +20,6 @@ pytest  # Testing
 # File operations
 pathlib 
 gunicorn
+
+# AI/ML
+google-generativeai  # Google's Generative AI library
