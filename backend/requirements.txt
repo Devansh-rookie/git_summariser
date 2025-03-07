@@ -17,11 +17,6 @@ black   # Code formatting
 flake8  # Code linting
 pytest  # Testing
 
-# Logging and debugging
-logging
-
-# JSON processing
-
-
 # File operations
 pathlib 
+gunicorn
