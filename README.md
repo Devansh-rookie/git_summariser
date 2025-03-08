@@ -1,4 +1,7 @@
 
+To visit the project go to : "https://git-summariser.vercel.app/"
+
+
 # Project Setup Documentation
 
 ## 🔐 Environment Setup
