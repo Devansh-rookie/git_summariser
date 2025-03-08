@@ -14,7 +14,7 @@ const Header = () => {
         <Link to="/codeeditor" className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors">Code Editor</Link>
         {/* <GitBranch size={18} className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors" /> */}
         <Star size={20} className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors" />
-        <Github size={22} className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors" />
+         <a href="https://github.com/"><Github size={22} className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors" /></a> 
         <Moon size={20} className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors" />
         {/* <Settings size={18} className="text-gray-400 hover:text-gray-200 cursor-pointer transition-colors" /> */}
       </div>

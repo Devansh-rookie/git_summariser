@@ -14,7 +14,7 @@ const Footer = () => {
           <motion.a 
             whileHover={{ scale: 1.1, rotate: 10 }}
             whileTap={{ scale: 0.9 }}
-            href="https://github.com/your-repo" 
+            href="https://github.com/Devansh-rookie/git_summariser" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="hover:text-[#c9d1d9] transition-colors"
@@ -24,7 +24,7 @@ const Footer = () => {
           <motion.a 
             whileHover={{ scale: 1.1, rotate: -10 }}
             whileTap={{ scale: 0.9 }}
-            href="mailto:contact@gitdeci.com" 
+            href="mailto:123110029@nitkkr.ac.in" 
             className="hover:text-[#c9d1d9] transition-colors"
           >
             <Mail className="w-5 h-5" />
@@ -32,7 +32,7 @@ const Footer = () => {
         </div>
         
         <div className="flex items-center gap-4">
-          {['dev1', 'dev2', 'dev3', 'dev4'].map((dev, index) => (
+          {['ch_rishabh2', 'devansh151005', 'pura.npalsingh', 'sanskaraggarwal720'].map((dev, index) => (
             <motion.a 
               key={index}
               whileHover={{ scale: 1.1, rotate: 10 }}
